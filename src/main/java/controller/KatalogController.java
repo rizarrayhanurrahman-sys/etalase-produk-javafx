@@ -53,9 +53,18 @@ public class KatalogController {
 
     @FXML
     private void initialize() {
-        fotoBox.getItems().add("roti.png");
-        fotoBox.getItems().add("susu.png");
-        fotoBox.getItems().add("kopi.png");
+       fotoBox.getItems().addAll(
+                "roti.png",
+                "susu.png",
+                "kopi.png",
+                "wagyu-steak.jpg",
+                "sushi-platter.jpg",
+                "truffle-pasta.jpg",
+                "croissant.jpg",
+                "tiramisu.jpg",
+                "matcha-latte.jpg",
+                "berry-juice.jpg"
+        );
         kembaliKeModeTambah();
         try {
             showData();
