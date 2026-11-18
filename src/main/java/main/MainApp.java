@@ -16,7 +16,7 @@ public class MainApp extends Application {
                 getClass().getResource("/view/katalog.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 760);
-        stage.setTitle("Katalog Produk UPI Store");
+        stage.setTitle("Etalase Produk UPI Store");
         stage.setMinWidth(680);
         stage.setMinHeight(500);
         stage.setScene(scene);

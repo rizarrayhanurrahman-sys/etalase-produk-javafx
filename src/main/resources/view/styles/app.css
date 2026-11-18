@@ -83,3 +83,19 @@
 .button-batal:hover {
     -fx-background-color: #cbd5e1;
 }
+.root {
+    -fx-background-color: #f0fdfa;
+}
+.header {
+    -fx-background-color: #ccfbf1;
+}
+.title {
+    -fx-text-fill: #115e59;
+}
+.button-primary {
+    -fx-background-color: #0d9488;
+    -fx-text-fill: white;
+}
+.button-primary:hover {
+    -fx-background-color: #0f766e;
+}

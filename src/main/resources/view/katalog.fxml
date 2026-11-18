@@ -13,7 +13,7 @@
 <BorderPane prefHeight="760" prefWidth="1000" stylesheets="@styles/app.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.KatalogController">
     <top>
         <VBox spacing="8" styleClass="header">
-            <Label styleClass="title" text="Katalog Produk" />
+            <Label styleClass="title" text="Etalase Produk" />
             <Label styleClass="muted" text="Isi form lalu simpan. Kelola produk lewat tombol Ubah dan Hapus di tiap kartu." wrapText="true" />
             <Label fx:id="modeLabel" styleClass="mode-label" text="Mode tambah: produk baru" />
             <Label text="Nama produk" />
