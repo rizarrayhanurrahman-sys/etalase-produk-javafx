@@ -54,3 +54,32 @@
 .tombol-kartu-hapus:hover {
     -fx-background-color: #fee2e2;
 }
+.tombol-kartu-ubah {
+    -fx-background-color: transparent;
+    -fx-border-color: #0d9488;
+    -fx-border-radius: 8;
+    -fx-text-fill: #0d9488;
+    -fx-padding: 5 14;
+    -fx-cursor: hand;
+}
+.tombol-kartu-ubah:hover {
+    -fx-background-color: #ccfbf1;
+}
+.kartu-aktif {
+    -fx-border-color: #0d9488;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+.mode-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f766e;
+}
+.button-batal {
+    -fx-background-color: #e2e8f0;
+    -fx-text-fill: #334155;
+    -fx-padding: 10 24;
+    -fx-background-radius: 8;
+}
+.button-batal:hover {
+    -fx-background-color: #cbd5e1;
+}

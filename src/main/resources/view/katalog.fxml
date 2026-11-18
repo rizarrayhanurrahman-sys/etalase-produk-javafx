@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -13,14 +14,18 @@
     <top>
         <VBox spacing="8" styleClass="header">
             <Label styleClass="title" text="Katalog Produk" />
-            <Label styleClass="muted" text="Isi form, simpan, lalu lihat katalog." wrapText="true" />
+            <Label styleClass="muted" text="Isi form lalu simpan. Kelola produk lewat tombol Ubah dan Hapus di tiap kartu." wrapText="true" />
+            <Label fx:id="modeLabel" styleClass="mode-label" text="Mode tambah: produk baru" />
             <Label text="Nama produk" />
             <TextField fx:id="namaField" promptText="Contoh: Roti Cokelat" />
             <Label text="Harga (Rp)" />
             <TextField fx:id="hargaField" promptText="Contoh: 10000" />
             <Label text="Foto contoh" />
             <ComboBox fx:id="fotoBox" maxWidth="Infinity" />
-            <Button onAction="#saveProduct" styleClass="button-primary" text="Simpan" />
+            <HBox spacing="8">
+                <Button fx:id="simpanButton" onAction="#saveProduct" styleClass="button-primary" text="Simpan Produk" />
+                <Button fx:id="batalButton" managed="false" onAction="#batalUbah" styleClass="button-batal" text="Batal" visible="false" />
+            </HBox>
             <Label fx:id="pesanLabel" wrapText="true" />
             <Label fx:id="jumlahLabel" text="Jumlah produk: 0" />
         </VBox>
