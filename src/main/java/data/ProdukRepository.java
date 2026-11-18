@@ -12,8 +12,8 @@ public class ProdukRepository {
 
     public void add(Produk produk) throws SQLException {
         String sql = "INSERT INTO produk (nama, harga, foto) VALUES (?, ?, ?)";
-        try ( 
-            Connection koneksi = Database.bukaKoneksi();  
+        try (
+            Connection koneksi = Database.bukaKoneksi();
             PreparedStatement perintah = koneksi.prepareStatement(sql)) {
             perintah.setString(1, produk.getNama());
             perintah.setLong(2, produk.getHarga());
@@ -22,12 +22,35 @@ public class ProdukRepository {
         }
     }
 
+    public void ubah(Produk produk) throws SQLException {
+        String sql = "UPDATE produk SET nama = ?, harga = ?, foto = ? WHERE id = ?";
+        try (
+            Connection koneksi = Database.bukaKoneksi();
+            PreparedStatement perintah = koneksi.prepareStatement(sql)) {
+            perintah.setString(1, produk.getNama());
+            perintah.setLong(2, produk.getHarga());
+            perintah.setString(3, produk.getFoto());
+            perintah.setLong(4, produk.getId());
+            perintah.executeUpdate();
+        }
+    }
+
+    public void hapus(long id) throws SQLException {
+        String sql = "DELETE FROM produk WHERE id = ?";
+        try (
+            Connection koneksi = Database.bukaKoneksi();
+            PreparedStatement perintah = koneksi.prepareStatement(sql)) {
+            perintah.setLong(1, id);
+            perintah.executeUpdate();
+        }
+    }
+
     public ArrayList<Produk> getAll() throws SQLException {
         ArrayList<Produk> daftarProduk = new ArrayList<Produk>();
         String sql = "SELECT id, nama, harga, foto FROM produk ORDER BY id";
-        try ( 
-            Connection koneksi = Database.bukaKoneksi();  
-            PreparedStatement perintah = koneksi.prepareStatement(sql);  
+        try (
+            Connection koneksi = Database.bukaKoneksi();
+            PreparedStatement perintah = koneksi.prepareStatement(sql);
             ResultSet hasil = perintah.executeQuery()) {
             while (hasil.next()) {
                 long id = hasil.getLong("id");
