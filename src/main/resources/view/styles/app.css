@@ -43,3 +43,14 @@
 .scroll-pane, .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+.tombol-kartu-hapus {
+    -fx-background-color: transparent;
+    -fx-border-color: #dc2626;
+    -fx-border-radius: 8;
+    -fx-text-fill: #dc2626;
+    -fx-padding: 5 14;
+    -fx-cursor: hand;
+}
+.tombol-kartu-hapus:hover {
+    -fx-background-color: #fee2e2;
+}

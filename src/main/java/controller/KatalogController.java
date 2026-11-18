@@ -2,13 +2,21 @@ package controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Optional;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -30,6 +38,7 @@ public class KatalogController {
     @FXML
     private TilePane katalogPane;
     private final ProdukRepository repository = new ProdukRepository();
+    private final NumberFormat formatRupiah = NumberFormat.getInstance(Locale.forLanguageTag("id-ID"));
 
     @FXML
     private void initialize() {
@@ -82,9 +91,15 @@ public class KatalogController {
         Label namaLabel = new Label(produk.getNama());
         namaLabel.setWrapText(true);
         namaLabel.getStyleClass().add("nama-produk");
-        Label hargaLabel = new Label("Rp" + produk.getHarga());
+        Label hargaLabel = new Label("Rp " + formatRupiah.format(produk.getHarga()));
         Label idLabel = new Label("ID: " + produk.getId());
         idLabel.getStyleClass().add("muted");
+
+        Button hapusButton = new Button("Hapus");
+        hapusButton.getStyleClass().add("tombol-kartu-hapus");
+        hapusButton.setOnAction(e -> hapusKartu(produk));
+        HBox aksi = new HBox(8);
+        aksi.getChildren().add(hapusButton);
 
         VBox kartu = new VBox();
         kartu.setSpacing(8);
@@ -96,6 +111,7 @@ public class KatalogController {
         kartu.getChildren().add(namaLabel);
         kartu.getChildren().add(hargaLabel);
         kartu.getChildren().add(idLabel);
+        kartu.getChildren().add(aksi);
         return kartu;
     }
 
@@ -128,6 +144,34 @@ public class KatalogController {
             pesanLabel.setText("Produk berhasil disimpan.");
         } catch (SQLException e) {
             pesanLabel.setText("Data tersimpan, tetapi katalog gagal dimuat ulang.");
+            e.printStackTrace();
+        }
+    }
+
+    private void hapusKartu(Produk produk) {
+        ButtonType ya = new ButtonType("Ya, hapus", ButtonBar.ButtonData.OK_DONE);
+        ButtonType tidak = new ButtonType("Batal", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert konfirmasi = new Alert(Alert.AlertType.WARNING,
+                "Produk \"" + produk.getNama() + "\" akan dihapus permanen.",
+                ya, tidak);
+        konfirmasi.setTitle("Konfirmasi hapus");
+        konfirmasi.setHeaderText("Hapus produk ini?");
+        Optional<ButtonType> jawaban = konfirmasi.showAndWait();
+        if (jawaban.isEmpty() || jawaban.get() != ya) {
+            return;
+        }
+        try {
+            repository.hapus(produk.getId());
+        } catch (SQLException e) {
+            pesanLabel.setText("Gagal menghapus. Lihat Output.");
+            e.printStackTrace();
+            return;
+        }
+        try {
+            showData();
+            pesanLabel.setText("Produk \"" + produk.getNama() + "\" dihapus.");
+        } catch (SQLException e) {
+            pesanLabel.setText("Data terhapus, tetapi katalog gagal dimuat ulang.");
             e.printStackTrace();
         }
     }
